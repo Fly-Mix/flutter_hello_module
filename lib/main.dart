@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'r.g.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,8 +17,9 @@ class MyApp extends StatelessWidget {
         // application has a blue toolbar. Then, without quitting the app, try
         // changing the primarySwatch below to Colors.green and then invoke
         // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or press Run > Flutter Hot Reload in a Flutter IDE). Notice that the
-        // counter didn't reset back to zero; the application is not restarted.
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Hello Module Demo'),
@@ -43,46 +46,86 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  void _alertMessage(String message) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return new CupertinoAlertDialog(
+            content: Text(
+              "$message",
+              textAlign: TextAlign.justify,
+            ),
+            actions: <Widget>[
+              CupertinoButton(
+                onPressed: () {
+                  Navigator.of(context).pop("点击了确定");
+                },
+                child: Text("确定"),
+              ),
+            ],
+          );
+        });
+  }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  void _readTestJson() async {
+    var rawString = await R.text.test_json();
+    _alertMessage(rawString);
+  }
+
+  void _readTestYaml() async {
+    var rawString = await R.text.test_yaml();
+    _alertMessage(rawString);
   }
 
   @override
   Widget build(BuildContext context) {
     var imageWidget1 = Image(
-      image: AssetImage("images/test_only_main_asset_1.png"),
+      image: R.image.test_only_main_asset_1(),
       width: 100,
       height: 100,
     );
 
     var imageWidget2 = Image(
-      image: AssetImage("images/test_asset_variants/test_png_variant_1.png"),
+      image: R.image.test_png_variant_1(),
       width: 100,
       height: 100,
     );
 
     var imageWidget3 = Image(
-      image: AssetImage("images2/test_only_main_asset_2.png", package: "flutter_hello_module"),
+      image: R.image.test_only_main_asset_2(),
       width: 100,
       height: 100,
     );
 
     var imageWidget4 = Image(
-      image: AssetImage("images2/test_asset_variants/test_png_variant_2.png",
-          package: "flutter_hello_module"),
+      image: R.image.test_png_variant_2(),
       width: 100,
       height: 100,
     );
 
+    var amiri_TextWidget = Text("test Amiri 字体",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontFamily: R.fontFamily.amiri, fontWeight: FontWeight.bold));
+
+    var baloo_Thambi_2_TextWidget = Text("test Baloo_Thambi_2 字体",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontFamily: R.fontFamily.baloo_Thambi_2,
+        ));
+
+    var liu_Jian_Mao_Cao_TextWidget = Text("test Liu_Jian_Mao_Cao 字体",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontFamily: R.fontFamily.liu_Jian_Mao_Cao,
+          fontStyle: FontStyle.normal,
+        ));
+
+    var dan_Zhai_Hang_Shu_Cai_TextWidget = Text("test Dan_Zhai_Hang_Shu_Cai 字体",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontFamily: R.fontFamily.dan_Zhai_Hang_Shu_Cai,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w900));
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -116,24 +159,54 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              "--- Test Image Resource ---",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: R.fontFamily.lobster,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w900,
+              ),
             ),
             imageWidget1,
             imageWidget2,
             imageWidget3,
-            imageWidget4
+            imageWidget4,
+            Text(
+              "--- Test Text Resource ---",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: R.fontFamily.lobster,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900),
+            ),
+            CupertinoButton(
+              child: Text(
+                "read  test.json",
+              ),
+              onPressed: _readTestJson,
+            ),
+            CupertinoButton(
+              child: Text(
+                "read  test.yaml",
+              ),
+              onPressed: _readTestYaml,
+            ),
+            Text(
+              "--- Test Font Resource ---",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: R.fontFamily.pacifico,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900),
+            ),
+            amiri_TextWidget,
+            baloo_Thambi_2_TextWidget,
+            liu_Jian_Mao_Cao_TextWidget,
+            dan_Zhai_Hang_Shu_Cai_TextWidget
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
