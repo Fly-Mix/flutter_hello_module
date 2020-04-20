@@ -79,25 +79,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var imageWidget1 = Image(
+    var nonImpliedImageWidget_1 = Image(
       image: R.image.test_only_main_asset_1(),
       width: 100,
       height: 100,
     );
 
-    var imageWidget2 = Image(
+    var nonImpliedImageWidget_2 = Image(
       image: R.image.test_png_variant_1(),
       width: 100,
       height: 100,
     );
 
-    var imageWidget3 = Image(
+    var impliedImageWidget_1 = Image(
       image: R.image.test_only_main_asset_2(),
       width: 100,
       height: 100,
     );
 
-    var imageWidget4 = Image(
+    var impliedImageWidget_2 = Image(
       image: R.image.test_png_variant_2(),
       width: 100,
       height: 100,
@@ -126,6 +126,14 @@ class _MyHomePageState extends State<MyHomePage> {
             fontFamily: R.fontFamily.dan_Zhai_Hang_Shu_Cai,
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w900));
+
+    var github_IconWidget = Icon(_YorkFishIconData.github, color: Colors.blue);
+    var newYork_IconWidget = Icon(_YorkFishIconData.newYork, color: Colors.red);
+    var fish_IconWidget = Icon(_YorkFishIconData.fish, color: Colors.blue);
+
+    var sun_IconWidget = Icon(_SkyIconData.sun, color: Colors.blue);
+    var moon_IconWidget = Icon(_SkyIconData.moon, color: Colors.red);
+    var stars_IconWidget = Icon(_SkyIconData.stars, color: Colors.blue);
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -162,20 +170,21 @@ class _MyHomePageState extends State<MyHomePage> {
               "--- Test Image Resource ---",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontFamily: R.fontFamily.lobster,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w900,
-              ),
+                  fontFamily: R.fontFamily.lobster,
+                  package: null,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900),
             ),
-            imageWidget1,
-            imageWidget2,
-            imageWidget3,
-            imageWidget4,
+            nonImpliedImageWidget_1,
+            nonImpliedImageWidget_2,
+            impliedImageWidget_1,
+            impliedImageWidget_2,
             Text(
               "--- Test Text Resource ---",
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: R.fontFamily.lobster,
+                  package: null,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w900),
             ),
@@ -196,17 +205,71 @@ class _MyHomePageState extends State<MyHomePage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: R.fontFamily.pacifico,
+                  package: null,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w900),
             ),
             amiri_TextWidget,
             baloo_Thambi_2_TextWidget,
             liu_Jian_Mao_Cao_TextWidget,
-            dan_Zhai_Hang_Shu_Cai_TextWidget
+            dan_Zhai_Hang_Shu_Cai_TextWidget,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[github_IconWidget, newYork_IconWidget, fish_IconWidget],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[sun_IconWidget, moon_IconWidget, stars_IconWidget],
+            ),
+            Text(
+              "--- Ending ---",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: R.fontFamily.pacifico,
+                  package: null,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900),
+            ),
           ],
         ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+class _YorkFishIconData {
+  static String fontFamily = R.fontFamily.yorkFish_IconFont;
+
+  // the unicode of icon see: lib/assets/fonts/YorkFish_IconFont/iconfont.json
+
+  // github
+  static IconData github =
+      IconData(0xe628, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
+
+  // new york
+  static IconData newYork =
+      IconData(0xe648, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
+
+  // fish
+  static IconData fish =
+      IconData(0xefd7, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
+}
+
+class _SkyIconData {
+  static String fontFamily = R.fontFamily.sky_IconFont;
+
+  // the unicode of icon see: assets/fonts/Sky_IconFont/iconfont.json
+
+  // sun
+  static IconData sun =
+      IconData(0xe659, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
+
+  // moon
+  static IconData moon =
+      IconData(0xe6c3, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
+
+  // stars
+  static IconData stars =
+      IconData(0xe63d, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
 }
