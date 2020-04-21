@@ -1,4 +1,4 @@
-# flutterhellomodule
+# flutter_hello_module
 
 A new Flutter module.
 
