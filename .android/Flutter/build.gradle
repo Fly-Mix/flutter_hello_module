@@ -30,23 +30,16 @@ group 'com.ykunit.flutterhellomodule'
 version '1.0'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 }
 
 flutter {
     source '../..'
-}
-
-dependencies {
-    testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:support-v13:27.1.1'
-    implementation 'com.android.support:support-annotations:27.1.1'
 }
